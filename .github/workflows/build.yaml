@@ -46,7 +46,7 @@ jobs:
           file: ./Dockerfile
           push: true
           outputs: type=image
-          platforms: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
+          platforms: linux/amd64
           build-args: |
               LEDFX_VERSION=${{ env.LEDFX_VERSION }}
           labels: |
