@@ -6,6 +6,7 @@ ARG LEDFX_VERSION="2.0.60"
 RUN set -eux && apt-get update && apt-get install -y \
   gcc \
   git \
+  cmake \
   libatlas3-base \
   libavformat58 \
   libavcodec-dev \
@@ -17,7 +18,7 @@ RUN set -eux && apt-get update && apt-get install -y \
   && python3 -m venv /opt/venv \
   && . /opt/venv/bin/activate \ 
   # aubio errors on the first pip command, however if we don't install it here, it will fail later
-  && python3 -m pip install --upgrade pip wheel setuptools aubio  \
+  && python3 -m pip install --upgrade pip wheel setuptools aubio samplerate \
   && python3 -m pip install ledfx==${LEDFX_VERSION}
 
 FROM debian:11.9-slim as ledfx
