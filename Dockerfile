@@ -1,6 +1,6 @@
-FROM debian:trixie-slim as ledfx-build-os
+FROM debian:11.9-slim as ledfx-build
 
-ARG LEDFX_VERSION="2.0.96"
+ARG LEDFX_VERSION="2.0.60"
 
 # Install dependencies
 RUN set -eux && apt-get update && apt-get install -y \
@@ -36,7 +36,7 @@ RUN set -eux && apt-get update && apt-get install -y --no-install-recommends \
   python3-distutils \
   avahi-daemon ${EXTRA_APT_PKGS}
 
-COPY --from=ledfx-build-os --chown=1000:1000 /opt/venv /opt/venv
+COPY --from=ledfx-build --chown=1000:1000 /opt/venv /opt/venv
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh \
   && useradd -u 1000 -U -d /home/ledfx -s /bin/false ledfx \
