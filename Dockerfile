@@ -20,7 +20,7 @@ RUN set -eux && apt-get update && apt-get install -y \
   && python3 -m pip install --upgrade pip wheel setuptools aubio  \
   && python3 -m pip install ledfx==${LEDFX_VERSION}
 
-FROM debian:11.6-slim as ledfx
+FROM debian:11.9-slim as ledfx
 ARG EXTRA_APT_PKGS=""
 ENV PATH="/opt/venv/bin:$PATH"
 
