@@ -1,16 +1,17 @@
 name: Build LedFx Image
 
 on:
-  push:
-    paths:
-      - Dockerfile
-      - .github/workflows/build.yaml
-  # workflow_dispatch:
   # push:
-  #   # branches:
-  #   #   # - main
-  pull_request:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - Dockerfile
+  #     - .github/workflows/build.yaml
   # workflow_call:
+  workflow_dispatch:
+  pull_request:
+  schedule:
+    - cron: "0 0 * * 0"
 
 jobs:
   build:
