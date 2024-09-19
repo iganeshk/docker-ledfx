@@ -2,14 +2,13 @@
 
 > Simple Docker container for [LedFX](https://www.ledfx.app/). <br/>
 >
-> [`ghcr.io/explodingcamera/ledfx:latest`](https://github.com/explodingcamera/docker-ledfx/pkgs/container/ledfx) <br/> [`docker.io/explodingcamera/ledfx:latest`](https://hub.docker.com/r/explodingcamera/ledfx)
+> [`ghcr.io/iganeshk/docker-ledfx:latest`](https://github.com/iganeshk/docker-ledfx/pkgs/container/docker-ledfx) 
 
 Only tested using `/dev/snd/`, should work with pulseaudio as well.
 
 ## Tags
 
-- [`latest`](https://github.com/explodingcamera/docker-ledfx/pkgs/container/ledfx) - Latest stable release
-- [`v2.x.x`](https://github.com/explodingcamera/docker-ledfx/pkgs/container/ledfx) - Specific release version (updated weekly)
+- [`latest`](https://github.com/iganeshk/docker-ledfx/pkgs/container/docker-ledfx) - Latest stable release
 
 ## Usage
 
@@ -30,7 +29,7 @@ docker run -d \
     # e.g give access to a usb sound card
     --device=/dev/snd \
     -v /path/to/config:/home/ledfx/.ledfx/config.json \
-    ghcr.io/explodingcamera/ledfx:latest
+    ghcr.io/iganeshk/docker-ledfx:latest
 ```
 
 ## Environment variables
