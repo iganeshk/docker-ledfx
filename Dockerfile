@@ -8,7 +8,7 @@ RUN set -eux && apt-get update && apt-get install -y \
   git \
   cmake \
   libatlas3-base \
-  libavformat58 \
+  libavformat59 \
   libavcodec-dev \
   portaudio19-dev \
   pulseaudio \
