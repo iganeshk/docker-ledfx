@@ -29,8 +29,8 @@ RUN set -eux && apt-get update && apt-get install -y --no-install-recommends \
   alsa-utils \
   gosu \
   libatlas3-base \
-  libavformat58 \
-  libavcodec58 \
+  libavformat59 \
+  libavcodec59 \
   libportaudio2 \
   pulseaudio \
   python3 \
