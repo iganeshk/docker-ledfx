@@ -1,6 +1,6 @@
-FROM debian:11.9-slim as ledfx-build
+FROM debian:12-slim as ledfx-build
 
-ARG LEDFX_VERSION="2.0.60"
+ARG LEDFX_VERSION="2.0.100"
 
 # Install dependencies
 RUN set -eux && apt-get update && apt-get install -y \
@@ -21,7 +21,7 @@ RUN set -eux && apt-get update && apt-get install -y \
   && python3 -m pip install --upgrade pip wheel setuptools aubio samplerate \
   && python3 -m pip install ledfx==${LEDFX_VERSION}
 
-FROM debian:11.9-slim as ledfx
+FROM debian:12-slim as ledfx
 ARG EXTRA_APT_PKGS=""
 ENV PATH="/opt/venv/bin:$PATH"
 
