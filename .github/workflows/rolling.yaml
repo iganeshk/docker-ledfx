@@ -1,4 +1,4 @@
-name: 'Rolling'
+name: 'Rolling Release'
 
 on:
   schedule:
@@ -33,9 +33,9 @@ jobs:
           fi
           echo "build_needed=${build_needed}" >> $GITHUB_ENV
 
-  build-ledfx:
-    name: 'Build LedFx'
+  build-ledfx-rolling:
+    name: 'Rolling Release'
     needs: [check-for-updates]
     if: ${{ needs.check-for-updates.outputs.updateAvailable == '1' }}
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/build.yaml
     secrets: inherit
