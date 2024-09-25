@@ -1,9 +1,9 @@
 name: 'Rolling Builds'
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: "0 0 * * 0"
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
 
 jobs:
   check-for-updates:
@@ -33,9 +33,9 @@ jobs:
           fi
           echo "build_needed=${build_needed}" >> $GITHUB_ENV
 
-  build-ledfx-rolling:
-    name: 'Build Rolling LedFx'
+  build-ledfx:
+    name: 'Build LedFx'
     needs: [check-for-updates]
     if: ${{ needs.check-for-updates.outputs.updateAvailable == '1' }}
-    uses: ${{ github.repository_owner }}/${{ github.repository }}/.github/workflows/build.yml@main
+    uses: ./.github/workflows/build.yml
     secrets: inherit
