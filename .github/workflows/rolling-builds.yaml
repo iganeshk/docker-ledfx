@@ -37,5 +37,5 @@ jobs:
     name: 'Build Rolling LedFx'
     needs: [check-for-updates]
     if: ${{ needs.check-for-updates.outputs.updateAvailable == '1' }}
-    uses: "{owner}/{repo}/.github/workflows/build.yml@{feature_branch}"
+    uses: ${{ github.repository_owner }}/${{ github.repository }}/.github/workflows/build.yml
     secrets: inherit
