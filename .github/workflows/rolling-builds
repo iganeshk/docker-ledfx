@@ -1,0 +1,41 @@
+name: 'Rolling Builds'
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  check-for-updates:
+    name: 'Check for LEDFX Updates'
+    runs-on: ubuntu-latest
+    outputs:
+      updateAvailable: ${{ env.build_needed }}
+    steps:
+      - name: 'Check LedFX Pypi Repository for Updates'
+        run: |
+          build_needed=0;
+          ledfx_latest="LEDFX_VERSION=$(curl -Ls https://pypi.org/pypi/ledfx/json | jq -r .info.version)"
+          repo_ledfx_latest=$( curl -sL "https://api.github.com/users/iganeshk/packages/container/docker-ledfx/versions" | jq '[.[] ] | .[0] .metadata .container .tags[0]' )
+          echo "LedFx/LedFx=${ledfx_latest} vs iganeshk/LedFx=${repo_ledfx_latest}"
+          if [ "$repo_ledfx_latest" == "null" ]
+          then
+            build_needed=1
+          else
+            curl -o ./semver2.sh -fsSL https://raw.githubusercontent.com/iganeshk/AdWireGuard-Dark/assets/semver2.sh
+            build_needed=$(bash ./semver2.sh ${ledfx_latest} ${repo_ledfx_latest})
+          fi
+          if [ "$build_needed" == 1 ]
+          then
+            echo "New LedFX ${ledfx_latest} build anticipated!"
+          else
+            echo "LedFX ${repo_ledfx_latest} is already latest!"
+          fi
+          echo "build_needed=${build_needed}" >> $GITHUB_ENV
+
+  build-ledfx-rolling:
+    name: 'Build Rolling LedFx'
+    needs: [check-for-updates]
+    if: ${{ needs.check-for-updates.outputs.updateAvailable == '1' }}
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
