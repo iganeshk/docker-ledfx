@@ -16,7 +16,7 @@ jobs:
         run: |
           build_needed=0;
           ledfx_latest="LEDFX_VERSION=$(curl -Ls https://pypi.org/pypi/ledfx/json | jq -r .info.version)"
-          repo_ledfx_latest=$( curl -sL "https://api.github.com/users/iganeshk/packages/container/docker-ledfx/versions" | jq '[.[] ] | .[0] .metadata .container .tags[0]' )
+          repo_ledfx_latest=$( curl -sL -H "Authorization: Bearer ${{ secrets.PKG_MGR_TOKEN }}" "https://api.github.com/users/iganeshk/packages/container/docker-ledfx/versions" | jq '[.[] ] | .[0] .metadata .container .tags[0]' )
           echo "LedFx/LedFx=${ledfx_latest} vs iganeshk/LedFx=${repo_ledfx_latest}"
           if [ "$repo_ledfx_latest" == "null" ]
           then
