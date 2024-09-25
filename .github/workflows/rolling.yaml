@@ -1,4 +1,4 @@
-name: 'Rolling Builds'
+name: 'Rolling'
 
 on:
   schedule:
